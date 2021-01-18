@@ -19,7 +19,7 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
-          GITHUB_TOKEN: ${{ env.PAT }}
+          # GITHUB_TOKEN: ${{ env.PAT }}
           BRANCH: gh-pages
           FOLDER: build
           CLEAN: true
