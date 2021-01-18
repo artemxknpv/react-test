@@ -1,22 +1,31 @@
 name: MasterDeployCI
+
 on: [push]
+
+env:
+  PAT: 4cb2eae651523a0a0c9fdc6c68951fb526ff3c29
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [10.x]
     steps:
       - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 10.x
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install Packages
-        run: npm install
+          node-version: 10.x
+      - run: |
+        yarn && yarn build
       - name: Deploy to GH Pages
         run: |
           git config --global user.email "your_github_email>"
           git config --global user.name "your_github_username>"
           git remote set-url origin https://your_personal_access_token>@github.com/your_github_username>/your_repo>.git
           npm run deploy
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ env.PAT }}
+          BRANCH: gh-pages
+          FOLDER: build
+          CLEAN: true
