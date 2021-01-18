@@ -15,13 +15,7 @@ jobs:
         with:
           node-version: 10.x
       - run: |
-        yarn && yarn build
-      - name: Deploy to GH Pages
-        run: |
-          git config --global user.email "your_github_email>"
-          git config --global user.name "your_github_username>"
-          git remote set-url origin https://your_personal_access_token>@github.com/your_github_username>/your_repo>.git
-          npm run deploy
+          yarn && yarn build
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
